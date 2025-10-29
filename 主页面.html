@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三晋巾帼 岁月风华 - 山西女性历史贡献线上展览</title>
+    <style>
+        /* 全局基础样式：适配移动端，统一风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 顶部导航栏：固定悬浮，移动端转为下拉菜单 */
+        .nav-bar {
+            background-color: #333;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scrollbar-width: thin; /* 火狐浏览器 */
+        }
+.nav-list::-webkit-scrollbar {
+    height: 6px;
+}
+.nav-list::-webkit-scrollbar-thumb {
+    background-color: #ffd700;
+    border-radius: 3px;
+}
+        .nav-list li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            white-space: nowrap;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-list li a:hover,
+        .nav-list li a.active {
+            background-color: #ffd700;
+            color: #333;
+        }
+
+        /* 页面容器：控制宽度，居中显示 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* 标题区通用样式：区分不同展厅主题色 */
+        .page-header {
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-index {
+            background: linear-gradient(90deg, #1E5799, #E74C3C);
+        }
+
+        .header-ex1 {
+            background-color: #ee1719;
+        }
+
+        .header-ex2 {
+            background-color: #1E5799;
+        }
+
+        .header-ex3 {
+            background-color: #9370DB;
+        }
+
+        .header-inter {
+            background-color: #ff6a00;
+        }
+
+        .header-res {
+            background-color: #696969;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-icon {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 40px;
+            height: 40px;
+            z-index: 2;
+        }
+
+        .audio-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+
+        /* 卡片通用样式：统一内容容器 */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .card-tag {
+            font-size: 0.8rem;
+            color: #666;
+            margin-left: 1rem;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .card-content.row {
+                flex-direction: row;
+            }
+
+            .card-content.row .card-img,
+            .card-content.row .card-text {
+                width: 50%;
+            }
+        }
+
+        .card-img img {
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* 视频比例优化样式 */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 比例（9/16=0.5625） */
+    overflow: hidden;
+    border-radius: 4px; /* 与页面图片圆角保持一致 */
+}
+
+.video-container .video-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保证视频填满容器且不变形 */
+}
+
+/* 移动端适配调整 */
+@media (max-width: 767px) {
+    .video-container {
+        padding-top: 66.67%; /* 移动端可微调为 3:2 比例（更适合竖屏观看） */
+    }
+}
+
+        .img-source,
+        .audio-source {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .card-text p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .inscription {
+            font-size: 1.5rem;
+            color: #E74C3C;
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .visit-tip {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .visit-tip img {
+            width: 20px;
+        }
+
+        /* 音频播放器样式 */
+        .audio-player {
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        /* 数据图表样式 */
+        .chart-box {
+            width: 100%;
+            height: 300px;
+            margin: 1rem 0;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .chart-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 轮播图样式 */
+        .carousel {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-dot {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: white;
+        }
+
+        /* 时间轴样式 */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0.5rem;
+            width: 2px;
+            height: 100%;
+            background-color: #1E5799;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: #1E5799;
+            border: 3px solid white;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #1E5799;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 表格样式 */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            border: 1px solid #eee;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .compare-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        /* 互动模块样式 */
+        .inter-module {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .inter-module h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #FF8C00;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #1E5799;
+        }
+
+        .btn-primary:hover {
+            background-color: #144272;
+        }
+
+        .btn-danger {
+            background-color: #E74C3C;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-warning {
+            background-color: #FF8C00;
+        }
+
+        .btn-warning:hover {
+            background-color: #e67e00;
+        }
+
+        .qna-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .qna-question {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .qna-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .option.correct {
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            color: #3c763d;
+        }
+
+        .option.incorrect {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+        }
+
+        .qna-explain {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .flower-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .flower-item {
+            text-align: center;
+            width: 150px;
+        }
+
+        .flower-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid #FF8C00;
+        }
+
+        .flower-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flower-count {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+
+        /* 资源页样式 */
+        .resource-category {
+            margin-bottom: 2rem;
+        }
+
+        .resource-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #696969;
+            border-left: 4px solid #696969;
+            padding-left: 0.5rem;
+        }
+
+        .resource-list {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .resource-list li {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .resource-list li::before {
+            content: '•';
+            position: absolute;
+            left: -1rem;
+            color: #696969;
+            font-weight: bold;
+        }
+
+        .resource-link {
+            color: #1E5799;
+            text-decoration: none;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 底部导航与版权 */
+        .page-footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-nav {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-nav .btn {
+            margin: 0 0.5rem;
+        }
+
+        .share-icons {
+            margin: 1.5rem 0;
+        }
+
+        .share-icons a {
+            margin: 0 1rem;
+            display: inline-block;
+        }
+
+        .share-icons img {
+            width: 30px;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* 图片放大遮罩层 */
+        .mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mask-img {
+            max-width: 80%;
+            max-height: 80%;
+            border: 4px solid white;
+            border-radius: 4px;
+        }
+
+        /* 证书弹窗 */
+        .cert-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cert-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .cert-img {
+            width: 100%;
+            margin-bottom: 1rem;
+            border: 1px solid #eee;
+        }
+
+        /* 响应式适配：移动端特殊样式 */
+        @media (max-width: 767px) {
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .page-header p {
+                font-size: 0.9rem;
+            }
+
+            .header-icon,
+            .audio-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .card-header h3 {
+                font-size: 1.1rem;
+            }
+
+            .carousel {
+                height: 200px;
+            }
+
+            .chart-box {
+                height: 200px;
+            }
+
+            .flower-container {
+                gap: 1rem;
+            }
+
+            .flower-item {
+                width: 120px;
+            }
+
+            .flower-img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 图片放大遮罩层（全局通用） -->
+    <div class="mask" onclick="closeMask()">
+        <img src="" alt="放大图片" class="mask-img">
+    </div>
+
+    <!-- 证书弹窗（互动专区用） -->
+    <div class="cert-modal" id="certModal">
+        <div class="cert-content">
+            <h3>三晋巾帼守护者证书</h3>
+            <img src="./certificate-template.png" alt="电子证书" class="cert-img" id="certImg">
+            <p>恭喜您完成知识问答闯关，荣获“三晋巾帼守护者”称号！</p>
+            <button class="btn btn-primary" onclick="saveCert()">保存证书</button>
+            <button class="btn btn-danger" onclick="closeCert()">关闭</button>
+        </div>
+    </div>
+
+    <!-- 顶部导航栏（全局通用） -->
+    <nav class="nav-bar">
+        <ul class="nav-list">
+            <li><a href="#index" class="active" onclick="switchPage('index')">首页（序厅）</a></li>
+            <li><a href="#exhibition1" onclick="switchPage('exhibition1')">第一展厅：烽火巾帼</a></li>
+            <li><a href="#exhibition2" onclick="switchPage('exhibition2')">第二展厅：建设巾帼</a></li>
+            <li><a href="#exhibition3" onclick="switchPage('exhibition3')">第三展厅：创新巾帼</a></li>
+            <li><a href="#interaction" onclick="switchPage('interaction')">互动专区</a></li>
+            <li><a href="#resources" onclick="switchPage('resources')">资源与版权</a></li>
+        </ul>
+    </nav>
+
+    <!-- 首页（序厅） -->
+    <div id="index" class="page-content">
+        <div class="container">
+            <!-- 标题区 -->
+            <div class="page-header header-index">
+                <h1>三晋巾帼 岁月风华</h1>
+                <p>山西女性革命·建设·改革历史贡献线上展览</p>
+                <p style="margin-top: 0.5rem; color: #ffd700;">巾帼不让须眉，三晋自有风华</p>
+            </div>
+
+<!-- 首页（序厅）中视频所在的卡片内容区 -->
+<div class="card">
+    <div class="card-content row">
+        <div class="card-img">
+            <div class="video-container">
+                <video controls style="width: 100%; height: 100%; object-fit: cover;">
+                    <source src="女性革命.mp4" type="video/mp4">
+                    您的浏览器不支持HTML5视频播放，请更新浏览器版本
+                </video>
+            </div>
+            <p class="img-source">视频素材来源：山西省档案馆官网（http://www.sxsdaj.gov.cn/）</p>
+        </div>
+        <div class="card-text">
+            <h3>展览地图</h3>
+            <p>本展览以时间为轴，分为三大展厅，带您领略不同历史时期山西女性的风采：</p>
+<div class="exhibition-map" style="margin: 2rem 0;">
+    <div class="map-timeline" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <!-- 刘胡兰图片（1:1比例优化） -->
+        <div class="map-item" onclick="switchPage('exhibition1')" style="flex: 1; min-width: 120px; text-align: center;">
+            <div style="width: 80px; height: 80px; margin: 0 auto 0.5rem; overflow: hidden; border-radius: 4px; border: 2px solid #ffd700; transition: transform 0.3s;">
+                <img src="./刘胡兰.png" alt="烽火巾帼" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <p style="font-size: 0.9rem; white-space: nowrap;">第一展厅<br>1920s-1949</p>
+        </div>
+        <!-- 分隔线（自适应宽度） -->
+        <div style="height: 2px; background-color: #ccc; flex: 0.2; min-width: 20px;"></div>
+        <!-- 申纪兰图片（1:1比例优化） -->
+        <div class="map-item" onclick="switchPage('exhibition2')" style="flex: 1; min-width: 120px; text-align: center;">
+            <div style="width: 80px; height: 80px; margin: 0 auto 0.5rem; overflow: hidden; border-radius: 4px; border: 2px solid #ffd700; transition: transform 0.3s;">
+                <img src="./申纪兰.png" alt="建设巾帼" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <p style="font-size: 0.9rem; white-space: nowrap;">第二展厅<br>1950s-1970s</p>
+        </div>
+        <!-- 分隔线（自适应宽度） -->
+        <div style="height: 2px; background-color: #ccc; flex: 0.2; min-width: 20px;"></div>
+        <!-- 非遗女性图片（1:1比例优化） -->
+        <div class="map-item" onclick="switchPage('exhibition3')" style="flex: 1; min-width: 120px; text-align: center;">
+            <div style="width: 80px; height: 80px; margin: 0 auto 0.5rem; overflow: hidden; border-radius: 4px; border: 2px solid #ffd700; transition: transform 0.3s;">
+                <img src="./非遗女性.png" alt="创新巾帼" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <p style="font-size: 0.9rem; white-space: nowrap;">第三展厅<br>1978-至今</p>
+        </div>
+    </div>
+    <p class="visit-guide" style="font-size: 0.9rem; color: #666; text-align: center;">
+        参观指南：建议浏览时长40分钟，各展厅支持语音导览
+    </p>
+</div>
+        </div>
+    </div>
+</div>
+
+            <!-- 底部导航与分享 -->
+            <div class="page-footer">
+                <div class="footer-nav">
+                    <button class="btn btn-primary" onclick="switchPage('exhibition1')">开始参观</button>
+                    <button class="btn btn-danger" onclick="switchPage('resources')">资源库入口</button>
+                </div>
+                <div class="share-icons">
+                    <a href="javascript:shareWechat()" title="分享至微信">
+                        <img src="./wechat-icon.png" alt="微信分享">
+                    </a>
+                    <a href="javascript:shareWeibo()" title="分享至微博">
+                        <img src="./weibo-icon.png" alt="微博分享">
+                    </a>
+                </div>
+                <p class="copyright">本网页为《毛概实践作业》配套线上展览，版权归第五组所有 | 2025年10月制作</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第一展厅：烽火巾帼（1920s-1949） -->
+    <div id="exhibition1" class="page-content" style="display: none;">
+        <div class="container">
+            <!-- 标题区 -->
+            <div class="page-header header-ex1">
+                <img src="./star-icon.png" alt="五角星图标" class="header-icon">
+                <button class="audio-btn" onclick="playAudio('audio-ex1')">
+                    <img src="./play-icon.png" alt="播放" style="width: 16px;"> 语音导览
+                </button>
+                <h1>第一展厅：烽火巾帼（1920s-1949）</h1>
+                <p>太行风骨铸忠魂，吕梁巾帼显担当</p>
+                <audio controls id="audio-ex1" style="display: inline-block;">
+                    <source src="刘胡兰.mp3" type="audio/mpeg">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+
+            <!-- 卡片1：刘胡兰 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>刘胡兰：生的伟大，死的光荣</h3>
+                    <span class="card-tag">革命英模 · 山西文水</span>
+                </div>
+                <div class="card-content row">
+                    <div class="card-img">
+                        <img src="./liuhulan-memorial.jpg" alt="刘胡兰就义地" onclick="openMask(this.src)">
+                        <p class="img-source">来源：文水县刘胡兰纪念馆官网（http://www.hongsesx.com/index.php?m=home&c=View&a=index&aid=226），2024年馆藏照片</p>
+                    </div>
+                    <div class="card-text">
+                        <div class="inscription">生的伟大，死的光荣</div>
+                        <p>1947年1月12日，15岁的刘胡兰面对敌人铡刀毫不畏惧，为革命牺牲。作为山西文水人，她是中国共产党历史上年龄最小的烈士之一，其事迹成为太行革命精神的重要象征。</p>
+                        <p>1946年，刘胡兰加入中国共产党，担任云周西村妇救会秘书，组织妇女做军鞋、送公粮、动员青年参军。面对国民党军和地主武装的袭击，她拒绝透露任何革命信息，最终献出生命。</p>
+                        <div class="visit-tip">
+                            <img src="./tip-icon.jpg" alt="提示">
+                            <span>实践建议：可前往吕梁文水县刘胡兰纪念馆参观，收集一手影像与文字资料</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片2：太行奶娘 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>太行奶娘：用生命守护革命火种</h3>
+                    <span class="card-tag">拥军模范 · 太行根据地</span>
+                </div>
+                <div class="card-content">
+                    <audio controls style="display: inline-block;">
+                        <audio id="audio-ex2" class="audio-player" controls>
+                        <source src="申纪兰.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频播放
+                    </audio></audio>
+                        <p class="audio-source">音频来源：《山西妇女运动史》配套口述录音（采访对象：太行奶娘王某后人，2019年）</p>
+                        <div class="card-img">
+                            <img src="./taihang-nainiang.jpg" alt="太行奶娘与八路军后代合影" onclick="openMask(this.src)">
+                            <p class="img-source">来源：武乡八路军太行纪念馆，拍摄时间：1945年，拍摄地点：太行革命根据地</p>
+                        </div>
+                        <div class="card-text">
+                            <p>1937-1945年抗日战争期间，太行、太岳革命根据地约2000名农村妇女自发成为"太行奶娘"，冒着生命危险哺育、保护八路军将士后代，其中近300名奶娘在日军"扫荡"中为保护孩子牺牲。
+                            </p>
+                            <p>奶娘们将八路军后代视为己出，为躲避日军搜查，常带着孩子躲进山洞、深山，忍饥挨饿却始终不让孩子受委屈。抗战胜利后，多数奶娘主动将孩子送回亲生父母身边，不求任何回报。</p>
+                        </div>
+                </div>
+            </div>
+
+            <!-- 卡片3：妇女救国会 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>妇女救国会：支前一线的"半边天"</h3>
+                    <span class="card-tag">根据地力量 · 生产支前</span>
+                </div>
+                <div class="card-content row">
+                    <div class="card-img">
+                        <div class="chart-box">
+                            <img src="./women-union-chart.jpg" alt="1940-1945年太行根据地妇女支前成果柱状图"
+                                onclick="openMask(this.src)">
+                        </div>
+                        <p class="img-source">来源：武乡八路军太行纪念馆馆藏档案，档案编号：TX2018042</p>
+                    </div>
+                    <div class="card-text">
+                        <p>抗日战争时期，山西各革命根据地成立"妇女救国会"，发动妇女参与生产、支援前线。仅太行根据地，就有80%以上的农村妇女加入救国会，成为后勤保障的重要力量。</p>
+                        <div class="card-img" style="margin: 1rem 0;">
+                            <img src="./women-union-slogan.jpg" alt="妇女救国会动员口号手稿" onclick="openMask(this.src)">
+                            <p class="img-source">来源：山西省档案馆，手稿时间：1942年</p>
+                        </div>
+                        <p>救国会提出"多做一双鞋，多杀一个敌""妇女解放，支援前线"等口号，组织妇女开展"做军鞋、筹军粮、抬担架"活动。据档案记载，1940-1945年，太行根据地妇女共制作军鞋120万双，筹集军粮800万斤，组织担架队300余支，为抗战胜利提供了坚实保障。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片4：地下工作者 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>地下工作者：隐蔽战线的"红色特工"</h3>
+                    <span class="card-tag">隐蔽战线 · 山西榆次</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-img">
+                        <img src="./underground-worker.jpg" alt="朱敏地下工作场景还原插画" onclick="openMask(this.src)">
+                        <p class="img-source">来源：山西省妇联官网"山西巾帼英烈"专栏，插画作者：张某，2020年</p>
+                    </div>
+                    <div class="card-text">
+                        <p>山西地下女性工作者多以教师、商贩等身份为掩护，使用伪装工具传递情报。朱敏（山西榆次人）等干部在太原、榆次等地建立地下交通线，为八路军输送重要军事情报，多次粉碎日军"围剿"计划。</p>
+                        <div class="card-content row" style="margin-top: 1rem;">
+                            <div class="card-img" style="width: 30%;">
+                                <img src="./underground-tool1.jpg" alt="伪装成针线包的情报盒" onclick="openMask(this.src)">
+                                <p class="img-source">伪装情报盒（山西省档案馆藏）</p>
+                            </div>
+                            <div class="card-img" style="width: 30%;">
+                                <img src="./underground-tool2.jpg" alt="暗号密码本" onclick="openMask(this.src)">
+                                <p class="img-source">暗号密码本（山西省档案馆藏）</p>
+                            </div>
+                            <div class="card-text" style="width: 40%;">
+                                <p>她们的工作充满危险，一旦暴露将面临酷刑与死亡。但山西女性凭借智慧与勇气，在隐蔽战线坚守岗位，为革命胜利传递"无形的火种"。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部导航 -->
+            <div class="page-footer">
+                <div class="footer-nav">
+                    <button class="btn btn-danger" onclick="switchPage('index')">返回首页</button>
+                    <button class="btn btn-primary" onclick="switchPage('exhibition2')">进入第二展厅</button>
+                </div>
+                <p class="copyright">本展厅内容源自《毛中特实践作业2》"革命战争时期（约1920s-1949）"板块 | 版权归实践作业团队所有</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二展厅：建设巾帼（1950s-1970s） -->
+    <div id="exhibition2" class="page-content" style="display: none;">
+        <div class="container">
+            <!-- 标题区 -->
+            <div class="page-header header-ex2">
+                <img src="./图标.png" alt="图标" class="header-icon">
+                <button class="audio-btn" onclick="playAudio('audio-ex2')">
+                    <img src="播放.png" alt="播放" style="width: 16px;"> 语音导览
+                </button>
+                <h1>第二展厅：建设巾帼（1950s-1970s）</h1>
+                <p>同工同酬开新篇，战天斗地谱华章</p>
+                <audio id="audio-ex2" class="audio-player" src="申纪兰.mp3">您的浏览器不支持音频播放
+            </div>
+
+            <!-- 板块1：申纪兰与男女同工同酬 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>申纪兰："男女同工同酬"的推动者</h3>
+                    <span class="card-tag">全国劳模 · 山西平顺</span>
+                </div>
+                <div class="card-content row">
+                    <div class="card-img">
+                        <img src="./男女同工同酬提案原文.png" alt="男女同工同酬提案原文" onclick="openMask(this.src)"
+                            style="max-width: 400px; max-height: 500px; width: auto; height: auto; margin: 0 auto; display: block;">
+                        <p class="img-source">来源：《申纪兰传》（作者：XXX，XX出版社2020年版，第86页）</p>
+                    </div>
+                    <div class="card-text">
+                        <p>申纪兰（山西平顺人）带领西沟妇女打破"妇女不下地"的传统，争取与男性同等的工分待遇，推动"男女同工同酬"写入1954年宪法，成为中国妇女解放史上的里程碑。</p>
+                        <div class="carousel">
+                            <div class="carousel-item active">
+                                <img src="./申纪兰与西沟妇女下地劳动.png" alt="申纪兰与西沟妇女下地劳动">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./西沟村集体劳动场景.png" alt="西沟村集体劳动场景">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./申纪兰获共和国勋章.png" alt="申纪兰获共和国勋章">
+                            </div>
+                            <div class="carousel-dot">
+                                <div class="dot active" onclick="switchCarousel(0)"></div>
+                                <div class="dot" onclick="switchCarousel(1)"></div>
+                                <div class="dot" onclick="switchCarousel(2)"></div>
+                            </div>
+                        </div>
+                        <p class="img-source">图片来源：平顺县西沟村史馆，拍摄时间：1953-1955年</p>
+                        <div class="visit-tip" style="margin-top: 1rem;">
+                            <img src="./提示.png" alt="提示">
+                            <span>实践建议：围绕"同工同酬"主题，查找申纪兰相关史料，探讨其对于中国妇女解放和社会主义建设的深远意义</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 板块2：郭凤莲与铁姑娘队 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>郭凤莲与"铁姑娘队"：农业学大寨的先锋</h3>
+                    <span class="card-tag">农业带头人 · 山西大寨</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-img">
+                        <img src="./铁姑娘队队旗复制品.png" alt="铁姑娘队队旗复制品" onclick="openMask(this.src)">
+                        <p class="img-source">来源：大寨纪念馆，1963年制作</p>
+                    </div>
+                    <div class="card-text">
+                        <p>1963年，大寨遭遇特大洪水，郭凤莲带领"铁姑娘队"（平均年龄18岁）与村民一起抢修梯田、重建家园，创造了"三战狼窝掌"的奇迹，成为"农业学大寨"运动的典型代表。</p>
+                        <div class="card-content row">
+                            <div class="card-img" style="width: 50%;">
+                                <img src="./铁姑娘队修梯田场景.png" alt="铁姑娘队修梯田场景" onclick="openMask(this.src)">
+                                <p class="img-source">来源：大寨纪念馆，拍摄时间：1964年</p>
+                            </div>
+                            <div class="card-text" style="width: 50%;">
+                                <div class="chart-box">
+                                    <img src="./1964-1970年大寨粮食产量折线图.png" alt="1964-1970年大寨粮食产量折线图"
+                                        onclick="openMask(this.src)">
+                                </div>
+                                <p class="img-source">数据来源：《山西日报》1971年2月15日第2版《大寨粮食产量再创新高》</p>
+                                <p>在"铁姑娘队"的带动下，大寨粮食产量从1964年的每亩200斤提升至1970年的每亩500斤，成为全国农业生产的榜样。她们"战天斗地"的奋斗精神，影响了一代山西女性。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 板块3：工业娘子军 -->
+            <!-- 板块3：工业娘子军 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>工业"娘子军"：能源重地的女性力量</h3>
+                    <span class="card-tag">工业建设者 · 太钢/大同煤矿</span>
+                </div>
+                <div class="card-content row">
+                    <div class="card-img" style="width: 50%;">
+                         <div class="video-container">
+                        <video controls class="video-box">
+                            
+                                <source src="申纪兰.mp4" type="video/mp4">
+                                您的浏览器不支持视频播放
+                        </video></div>
+                        <p class="img-source">视频来源：太钢集团厂史馆，拍摄时间：1965年</p>
+                    </div>
+                    <div class="card-text">
+                        <p>1950-1970年，山西作为能源重地，涌现出大批女矿工、女纺织工、女技术员。仅太钢和大同煤矿，女性职工数量就从1950年的800人增长至1970年的1.2万人，占职工总数的23%。
+                        </p>
+                        <!-- 原有图片 + 新增图片：横向并列 -->
+                        <div class="card-content row" style="display: flex; gap: 1rem;">
+                            <div class="card-img" style="width: 50%;">
+                                <img src="./大同煤矿女矿工合影.png" alt="大同煤矿女矿工合影" onclick="openMask(this.src)">
+                                <p class="img-source">来源:大同煤矿档案馆:拍摄时间:1970年</p>
+                            </div>
+                            <!-- 新增图片：大同煤矿女矿工工作场景 -->
+                            <div class="card-img" style="width: 50%;">
+                                <img src="./大同煤矿女矿工工作场景.png" alt="大同煤矿女矿工工作场景" onclick="openMask(this.src)">
+                                <p class="img-source">来源:大同煤矿档案馆:拍摄时间:1968年</p>
+                            </div>
+                        </div>
+                        <p>这些女性在炼钢、采矿、纺织等领域与男性并肩作战，克服"体力差异""性别偏见"等困难，用劳动诠释"妇女能顶半边天"的时代精神。太钢女技术员王某研发的"特种钢轧制技术"，还获得了1968年"全国工业技术创新奖"。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部导航 -->
+            <div class="page-footer">
+                <div class="footer-nav">
+                    <button class="btn btn-danger" onclick="switchPage('exhibition1')">返回第一展厅</button>
+                    <button class="btn btn-primary" onclick="switchPage('exhibition3')">进入第三展厅</button>
+                </div>
+                <p class="copyright">本展厅内容源自《毛概实践作业》"社会主义建设时期（约1950s-1970s）"板块 | 版权归第五组所有</p>
+            </div>
+        </div>
+    </div>
+
+        <!-- 第三展厅：三晋创新巾帼志（1978-至今） -->
+    <div id="exhibition3" class="page-content" style="display: none; background-color: #f9f5f0;">
+        <div class="container">
+            <!-- 标题区 -->
+            <div class="page-header header-ex3" style="background: linear-gradient(135deg, #8B4513 0%, #C41E3A 50%, #DAA520 100%);">
+                <img src="light-icon.png" alt="灯泡图标" class="header-icon" style="filter: brightness(0) invert(1);">
+                <button class="audio-btn" onclick="playAudio('audio-ex3')" style="background-color: rgba(255,255,255,0.2); color: white;">
+                    <img src="play-icon.png" alt="播放" style="width: 16px; filter: brightness(0) invert(1);"> 语音导览
+                </button>
+                <h1>第三展厅：三晋创新巾帼志（1978-至今）</h1>
+                <p>扎根三晋沃土，绽放创新光芒</p>
+                <audio id="audio-ex3" class="audio-player" src="audio-ex3.mp3">您的浏览器不支持音频播放
+            </div>
+
+            <!-- 板块1：首页Banner——巾帼创新·点亮三晋 -->
+            <div class="card" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 2rem; overflow: hidden; background: #fff;">
+                <div class="card-content" style="padding: 0;">
+                    <div style="position: relative; height: auto;  min-height: 400px; padding: 2rem 0;
+                    background: linear-gradient(135deg, rgba(139,69,19,0.8), rgba(196,30,58,0.7), rgba(218,165,32,0.6)), url('shanxi-landscape.jpg') center/cover no-repeat;">
+
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; width: 100%;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">巾帼创新·点亮三晋</h2>
+                            <div style="display: flex; justify-content: space-around; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;">
+                                <div style="flex: 1; min-width: 250px; margin: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 8px;">
+                                    <div style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">工业革新者</div>
+                                    <div style="font-size: 1.2rem;">苏景云</div>
+                                    <div style="font-size: 1rem; opacity: 0.9;">煤海深处的工艺突破</div>
+                                </div>
+                                <div style="flex: 1; min-width: 250px; margin: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 8px;">
+                                    <div style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">文化传承者</div>
+                                    <div style="font-size: 1.2rem;">韩玲</div>
+                                    <div style="font-size: 1rem; opacity: 0.9;">堆锦非遗的现代表达</div>
+                                </div>
+                                <div style="flex: 1; min-width: 250px; margin: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 8px;">
+                                    <div style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">农业开拓者</div>
+                                    <div style="font-size: 1.2rem;">崔丽枝</div>
+                                    <div style="font-size: 1rem; opacity: 0.9;">菌棚里的科技富民路</div>
+                                </div>
+                            </div>
+                            <button style="margin-top: 3rem; padding: 1rem 3rem; font-size: 1.2rem; background: white; color: #8B4513; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s;" onclick="document.getElementById('spirit-intro').scrollIntoView({behavior: 'smooth'});">
+                                立即探索
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 板块2：精神序章——为什么是她们？ -->
+            <div id="spirit-intro" class="card" style="background: #fff; border-left: 4px solid #8B4513; margin-bottom: 2rem;">
+                <div class="card-header" style="background: #8B4513; color: white;">
+                    <h3>精神序章：为什么是她们？</h3>
+                    <span class="card-tag" style="background: rgba(255,255,255,0.2); color: white;">时代背景</span>
+                </div>
+                <div class="card-content">
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; color: #333;">
+                        从煤海到田垄，从工坊到实验室，1978年以来，山西女性以'敢破敢立'的韧劲，在传统与现代的碰撞中开辟新路——她们不是'特例'，而是三晋创新力量的生动缩影。
+                    </p>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 280px; margin: 1rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f4e9, #fff); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <div style="font-size: 2.5rem; font-weight: bold; color: #8B4513; margin-bottom: 0.5rem;">37%</div>
+                            <div style="font-size: 1rem; color: #666;">山西女性科技工作者占比提升</div>
+                        </div>
+                        <div style="flex: 1; min-width: 280px; margin: 1rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f4e9, #fff); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <div style="font-size: 2.5rem; font-weight: bold; color: #C41E3A; margin-bottom: 0.5rem;">60%+</div>
+                            <div style="font-size: 1rem; color: #666;">非遗女性传承人占比</div>
+                        </div>
+                        <div style="flex: 1; min-width: 280px; margin: 1rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f4e9, #fff); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <div style="font-size: 2.5rem; font-weight: bold; color: #DAA520; margin-bottom: 0.5rem;">120%</div>
+                            <div style="font-size: 1rem; color: #666;">女性创业者数量增长</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 板块3：核心人物图鉴——三晋巾帼创新榜 -->
+            <div class="card" style="background: #fff; margin-bottom: 2rem;">
+                <div class="card-header" style="background: #C41E3A; color: white;">
+                    <h3>核心人物图鉴：三晋巾帼创新榜</h3>
+                    <span class="card-tag" style="background: rgba(255,255,255,0.2); color: white;">工业·农业·文化</span>
+                </div>
+                
+                <!-- 工业革新篇 -->
+                <div class="card-content" style="border-bottom: 1px solid #eee; padding-bottom: 2rem; margin-bottom: 2rem;">
+                    <h4 style="color: #8B4513; font-size: 1.5rem; margin-bottom: 1rem; padding-left: 1rem; border-left: 3px solid #8B4513; display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem; font-size: 1.8rem;">⚙️</span>
+                        工业革新篇：煤海中的"她改造"
+                    </h4>
+                    <div class="card-content row">
+                        <div class="card-img" style="width: 35%;">
+                            <img src="./su-jinfyun.jpg" alt="《从 “不让下井” 到 “工艺革新”：苏景云与山西煤矿的 “她力量”》
+" onclick="openMask(this.src)" style="border-radius: 8px;">
+                            <p class="img-source" style="font-size: 0.9rem;">苏景云，把创新写在山西黑土地下</p>
+                        </div>
+                        <div class="card-text" style="width: 65%;">
+                            <h5 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem;">苏景云：新中国首位女采煤队长的"工艺革命"</h5>
+                            <p style="margin-bottom: 1rem;">在男性主导的煤矿井下，苏景云以坚韧不拔的毅力和创新精神，从一名普通矿工成长为新中国首位女采煤队长。她不仅打破了性别偏见，更打破了技术瓶颈，在煤海中书写了女性的传奇。</p>
+                            
+                            <div style="background: #f8f4e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <h6 style="color: #8B4513; margin-bottom: 0.5rem;">人物小传</h6>
+                                <div class="timeline" style="margin-left: 0;">
+                                    <div class="timeline-item">
+                                        <div class="timeline-date" style="background: #8B4513;">1979年</div>
+                                        <div class="timeline-content">
+                                            <p>获"山西省三八红旗手"称号，坚守采煤一线岗位长达20年，带领全队超额完成生产任务</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-date" style="background: #8B4513;">1982年</div>
+                                        <div class="timeline-content">
+                                            <p>发明"煤层打眼多耳掏粉器"，解决井下作业效率低下问题，成为全队推广使用的标准工具</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-date" style="background: #8B4513;">1985年</div>
+                                        <div class="timeline-content">
+                                            <p>退休前仍坚持在一线优化"多绳套回柱法"，执着改进每一个技术细节，提升采煤安全性</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 1rem;">
+                                <h6 style="color: #8B4513; margin-bottom: 0.5rem;">创新亮点卡</h6>
+                                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #e0d5c0; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #8B4513; margin-bottom: 0.5rem;">煤层打眼多耳掏粉器</div>
+                                        <div style="font-size: 0.9rem; color: #666;">效率提升40%，减轻矿工劳动强度</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">1983年获得山西省技术革新二等奖</div>
+                                    </div>
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #e0d5c0; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #8B4513; margin-bottom: 0.5rem;">2.4米加长截盘作业法</div>
+                                        <div style="font-size: 0.9rem; color: #666;">杜绝重大伤亡事故，提高作业安全系数</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">在10个矿井推广应用</div>
+                                    </div>
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #e0d5c0; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #8B4513; margin-bottom: 0.5rem;">采煤工艺改革</div>
+                                        <div style="font-size: 0.9rem; color: #666;">成本下降20%，连续3年超额完成生产任务</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">为企业节约成本超100万元</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: #f8f8f8; padding: 1rem; border-radius: 8px; border-left: 3px solid #8B4513;">
+                                <h6 style="color: #333; margin-bottom: 0.5rem;">央视采访</h6>
+                                <img src="./tupian.png" alt="1979年山西妇联表彰文件节选" style="width: 100%; max-width: 300px; margin-bottom: 1rem; border-radius: 4px; border: 1px solid #ddd;">
+                                <button class="btn btn-sm" style="background: #8B4513; color: white; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;" onclick="playAudio('su-jingyun-audio')">老同事口述</button>
+                                <audio id="su-jingyun-audio" src="./1.mp4"></audio>
+                                <p style="font-style: italic; color: #666; margin-top: 0.5rem; background: rgba(248,244,233,0.5); padding: 1rem; border-radius: 4px;">
+                                    "1956年，苏景云被评为“全国煤炭系统先进生产者”和“全国先进生产者”，还受到毛主席、周总理等中央领导的接见。1957年被山西省政府授予“先进生产者”称号；1979年被山西省妇联授予“三八红旗手”称号；1990年被全国总工会授予“全国先进女职工工作者”称号。'"
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 农业赋能篇 -->
+                <div class="card-content" style="border-bottom: 1px solid #eee; padding-bottom: 2rem; margin-bottom: 2rem;">
+                    <h4 style="color: #2E8B57; font-size: 1.5rem; margin-bottom: 1rem; padding-left: 1rem; border-left: 3px solid #2E8B57; display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem; font-size: 1.8rem;">🌾</span>
+                        农业赋能篇：田垄上的"她智慧"
+                    </h4>
+                    <div class="card-content row">
+                        <div class="card-img" style="width: 35%;">
+                            <img src="./cui-lizhi.jpg" alt="崔丽枝在大棚查看菌菇的工作照" onclick="openMask(this.src)" style="border-radius: 8px;">
+                            <p class="img-source" style="font-size: 0.9rem;">崔丽枝在大棚查看菌菇生长情况</p>
+                        </div>
+                        <div class="card-text" style="width: 65%;">
+                            <h5 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem;">崔丽枝：菌棚里种出"新质生产力"的人大代表</h5>
+                            <p style="margin-bottom: 1rem;">从玉米地到智慧方舱，崔丽枝用20年时间实现了从普通农民到国家级科技示范户的华丽转身。她三赴农大求学、贷款建棚带动村民，推动"菌菜双种"模式，成为乡村振兴的典范，2023年当选为全国人大代表。</p>
+                            
+                            <div style="background: #f0f9f0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <h6 style="color: #2E8B57; margin-bottom: 0.5rem;">人物故事</h6>
+                                <p>崔丽枝的创业之路充满艰辛。2003年，她卖掉家里的耕牛筹集1万元，在3亩地上建起第一个香菇大棚。面对技术难题，她三赴山西农业大学求学，2015年获得农业推广硕士学位。2020年，她贷款300万元建设科技示范园，2025年全国两会期间，她提出"地标生境赋能老区"建议，将她多年的食用菌种植经验上升为国家层面的政策建议。</p>
+                                <div style="margin-top: 1rem; background: rgba(255,255,255,0.6); padding: 1rem; border-radius: 4px;">
+                                    <p style="font-style: italic; color: #2E8B57; margin: 0;">"我就是想让乡亲们知道，农业不是'靠天吃饭'的行业，而是充满科技含量的新质生产力。"——崔丽枝</p>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 1rem;">
+                                <h6 style="color: #2E8B57; margin-bottom: 0.5rem;">创新亮点卡</h6>
+                                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #d0e8d0; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #2E8B57; margin-bottom: 0.5rem;">统一制棒、分户管理模式</div>
+                                        <div style="font-size: 0.9rem; color: #666;">亩产效益提升300%，降低农户风险</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">已在3个县区推广应用</div>
+                                    </div>
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #d0e8d0; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #2E8B57; margin-bottom: 0.5rem;">科技示范园建设</div>
+                                        <div style="font-size: 0.9rem; color: #666;">70座菌棚带动2000余人就业</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">年销售额超5000万元</div>
+                                    </div>
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #d0e8d0; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #2E8B57; margin-bottom: 0.5rem;">食用菌智慧方舱</div>
+                                        <div style="font-size: 0.9rem; color: #666;">实现种植智能化管控，劳动效率提升50%</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">应用物联网、AI技术监测生长环境</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: #f8f8f8; padding: 1rem; border-radius: 8px; border-left: 3px solid #2E8B57;">
+                                <h6 style="color: #333; margin-bottom: 0.5rem;">民生温度</h6>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <div style="width: 45%; min-width: 200px;">
+                                        <img src="./honor.jpg" alt="崔丽枝获得荣誉时的图片" style="width: 100%; border-radius: 4px; border: 1px solid #ddd;">
+                                        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">崔丽枝获得荣誉时的图片</p>
+                                    </div>
+                                    <div style="width: 45%; min-width: 200px;">
+                                        <img src="./skill.jpg" alt="崔丽枝向技术人员介绍种植管理技巧的照片" style="width: 100%; border-radius: 4px; border: 1px solid #ddd;">
+                                        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">崔丽枝向技术人员介绍种植管理技巧的照片</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 文化焕新篇 -->
+                <div class="card-content">
+                    <h4 style="color: #C41E3A; font-size: 1.5rem; margin-bottom: 1rem; padding-left: 1rem; border-left: 3px solid #C41E3A; display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem; font-size: 1.8rem;">🎨</span>
+                        文化焕新篇：工坊里的"她传承"
+                    </h4>
+                    <div class="card-content row">
+                        <div class="card-img" style="width: 35%;">
+                            <img src="./han-ling.jpg" alt="韩玲在堆锦工坊的创作特写" onclick="openMask(this.src)" style="border-radius: 8px;">
+                            <p class="img-source" style="font-size: 0.9rem;">韩玲在堆锦工坊创作</p>
+                        </div>
+                        <div class="card-text" style="width: 65%;">
+                            <h5 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem;">韩玲：让堆锦"活"在当下的非遗传承人</h5>
+                            <p style="margin-bottom: 1rem;">1999年与堆锦的"一见钟情"，让韩玲放弃了稳定的教师工作，开启了一段传承与创新并存的艺术人生。她拜师国家级非遗传承人涂必成，苦练"拨折捏褶"技艺，在守正与创新中找到平衡，让这项有着300多年历史的山西传统工艺焕发新生。</p>
+                            
+                            <div style="background: #fdf0f5; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <h6 style="color: #C41E3A; margin-bottom: 0.5rem;">人物叙事</h6>
+                                <p>韩玲的传承之路充满挑战。2005年，她用全部积蓄租赁了一间30平米的小作坊，开始了艰难的创业。为了提升技艺，她遍访山西各地老艺人，收集整理了80多种濒临失传的堆锦技法。2012年，她的作品《百蝶图》在山西文化产业博览会上引起轰动，2018年被授予"山西省非物质文化遗产传承人"称号。</p>
+                                <p style="margin-top: 1rem;">韩玲不仅传承了堆锦技艺，更将其带入现代生活，开发文创产品、培养特殊群体学徒，让这项古老技艺焕发新生。她常说："传承不是复制，而是让传统在当下找到生存的土壤。"</p>
+                            </div>
+                            
+                            <div style="margin-bottom: 1rem;">
+                                <h6 style="color: #C41E3A; margin-bottom: 0.5rem;">创新亮点卡</h6>
+                                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #f8d0dc; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #C41E3A; margin-bottom: 0.5rem;">选材创新</div>
+                                        <div style="font-size: 0.9rem; color: #666;">用莲蓬、柿子等自然物料入作，赋予堆锦生活气息</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">环保材料替代传统矿物质颜料</div>
+                                    </div>
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #f8d0dc; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #C41E3A; margin-bottom: 0.5rem;">产品创新</div>
+                                        <div style="font-size: 0.9rem; color: #666;">开发堆锦胸针、车挂等文创品，年销售额增长150%</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">与多家文创品牌合作</div>
+                                    </div>
+                                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: #fff; border: 1px solid #f8d0dc; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                        <div style="font-weight: bold; color: #C41E3A; margin-bottom: 0.5rem;">传承创新</div>
+                                        <div style="font-size: 0.9rem; color: #666;">与特教学校合作，培养聋哑学徒20余人</div>
+                                        <div style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">建立"非遗工坊+特殊教育"培训模式</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: #f8f8f8; padding: 1rem; border-radius: 8px; border-left: 3px solid #C41E3A;">
+                                <h6 style="color: #333; margin-bottom: 0.5rem;">作品展示</h6>
+                                <div style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;">
+                                    <div style="min-width: 150px; text-align: center;">
+                                        <img src="./duijin-napoleon.jpg" alt="堆锦作品《拿破仑》" style="width: 150px; height: 150px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid #ddd;" onclick="openMask(this.src)">
+                                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">《拿破仑》</p>
+                                        <p style="font-size: 0.8rem; color: #888;">中西文化融合代表作</p>
+                                    </div>
+                                    <div style="min-width: 150px; text-align: center;">
+                                        <img src="./duijin-rabbit.jpg" alt="堆锦作品《玉兔祥瑞》" style="width: 150px; height: 150px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid #ddd;" onclick="openMask(this.src)">
+                                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">《玉兔祥瑞》</p>
+                                        <p style="font-size: 0.8rem; color: #888;">文创产品畅销款</p>
+                                    </div>
+                                    <div style="min-width: 150px; text-align: center;">
+                                        <img src="./duijin-lotus.jpg" alt="堆锦作品《莲蓬》" style="width: 150px; height: 150px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid #ddd;" onclick="openMask(this.src)">
+                                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">《莲蓬》</p>
+                                        <p style="font-size: 0.8rem; color: #888;">2025年深圳文博会铜奖</p>
+                                    </div>
+                                    <div style="min-width: 150px; text-align: center;">
+                                        <img src="./duijin-shishiruyi.jpg" alt="堆锦作品《柿柿如意》" style="width: 150px; height: 150px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid #ddd;" onclick="openMask(this.src)">
+                                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">《柿柿如意》</p>
+                                        <p style="font-size: 0.8rem; color: #888;">代表作品</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(204,30,58,0.05); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                                <h6 style="color: #C41E3A; margin-bottom: 0.5rem;">社会影响</h6>
+                                <p style="color: #666; font-size: 0.9rem;">韩玲的堆锦工坊已成为山西文化名片，累计接待国内外游客2万余人次，产品远销日本、韩国、美国等国家。通过"非遗+扶贫"模式，带动周边50余名农村妇女就业，人均年增收3万元以上。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 板块4：创新密码——她们的共同基因 -->
+            <div class="card" style="background: #fff; margin-bottom: 2rem;">
+                <div class="card-header" style="background: #DAA520; color: white;">
+                    <h3>创新密码：她们的共同基因</h3>
+                    <span class="card-tag" style="background: rgba(255,255,255,0.2); color: white;">精神特质</span>
+                </div>
+                <div class="card-content">
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px; margin: 1rem; padding: 2rem; background: linear-gradient(135deg, #fff9e6, #fff); border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.05); text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
+                            <h4 style="color: #DAA520; margin-bottom: 1rem;">敢破偏见</h4>
+                            <p style="color: #666;">拒绝'女性干不了重活/守不住老艺'的标签，苏景云下井采煤、韩玲扛起非遗传承，用行动打破边界。</p>
+                        </div>
+                        <div style="flex: 1; min-width: 300px; margin: 1rem; padding: 2rem; background: linear-gradient(135deg, #fff9e6, #fff); border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.05); text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                            <h4 style="color: #DAA520; margin-bottom: 1rem;">扎根实践</h4>
+                            <p style="color: #666;">创新从不是空想——崔丽枝在大棚里啃完20本专业书，苏景云在井下反复调试工具，答案永远在现场。</p>
+                        </div>
+                        <div style="flex: 1; min-width: 300px; margin: 1rem; padding: 2rem; background: linear-gradient(135deg, #fff9e6, #fff); border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.05); text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+                            <h4 style="color: #DAA520; margin-bottom: 1rem;">心怀他人</h4>
+                            <p style="color: #666;">从苏景云带领团队降本增效，到崔丽枝兜底村民风险，再到韩玲帮扶特殊群体，创新始终与'共生'相伴。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 板块5：互动延伸——寻找身边的创新巾帼 -->
+            <div class="card" style="background: #fff; margin-bottom: 2rem;">
+                <div class="card-header" style="background: #8B4513; color: white;">
+                    <h3>互动延伸：寻找身边的创新巾帼</h3>
+                    <span class="card-tag" style="background: rgba(255,255,255,0.2); color: white;">参与共建</span>
+                </div>
+                <div class="card-content">
+                    <!-- 故事征集 -->
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: #8B4513; margin-bottom: 1rem;">故事征集：分享你的创新故事</h4>
+                        <p style="margin-bottom: 1rem; color: #666;">开放"我的创新故事"投稿入口，鼓励用户分享身边女性的创新经历，注明"优质故事将入选网页更新"。</p>
+                        <button class="btn btn-primary" onclick="showStoryForm()" style="background: #8B4513; border: none;">我要分享</button>
+                        <div id="storyForm" class="form-group" style="margin-top: 1rem; display: none; padding: 1rem; background: #f8f4e9; border-radius: 8px;">
+                            <label for="storyText">我的创新故事（限500字）：</label>
+                            <textarea class="form-control" id="storyText" placeholder="请分享你或身边女性的创新故事..."></textarea>
+                            <button class="btn btn-primary" style="margin-top: 1rem; background: #8B4513; border: none;" onclick="submitStory()">提交故事</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 知识问答 -->
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: #C41E3A; margin-bottom: 1rem;">知识问答：三晋巾帼创新小测试</h4>
+                        <p style="margin-bottom: 1rem; color: #666;">答对题目可生成专属"创新巾帼纪念卡"用于分享。</p>
+                        <div class="qna-item" style="margin-bottom: 1rem;">
+                            <div class="qna-question">1. 苏景云发明的哪项工具提升了采煤效率？（ ）</div>
+                            <div class="qna-options">
+                                <div class="option" onclick="checkAnswer(1, this, 'A')">A. 煤层打眼多耳掏粉器</div>
+                                <div class="option" onclick="checkAnswer(1, this, 'B')">B. 液压支柱</div>
+                                <div class="option" onclick="checkAnswer(1, this, 'C')">C. 采煤机钻头</div>
+                            </div>
+                            <div class="qna-explain" id="explain1" style="display: none;">
+                                解析：苏景云发明的"煤层打眼多耳掏粉器"使采煤效率提升了40%。
+                            </div>
+                        </div>
+                        <div class="qna-item" style="margin-bottom: 1rem;">
+                            <div class="qna-question">2. 韩玲的堆锦作品《莲蓬》获得了哪个博览会的奖项？（ ）</div>
+                            <div class="qna-options">
+                                <div class="option" onclick="checkAnswer(2, this, 'A')">A. 深圳文博会</div>
+                                <div class="option" onclick="checkAnswer(2, this, 'B')">B. 上海世博会</div>
+                                <div class="option" onclick="checkAnswer(2, this, 'C')">C. 北京文博会</div>
+                            </div>
+                            <div class="qna-explain" id="explain2" style="display: none;">
+                                解析：《莲蓬》获得了2025年深圳文博会铜奖。
+                            </div>
+                        </div>
+                        <button class="btn btn-warning" onclick="generateCertificate()">生成纪念卡</button>
+                    </div>
+                    
+                    <!-- 资源链接 -->
+                    <div>
+                        <h4 style="color: #2E8B57; margin-bottom: 1rem;">资源链接：实用信息</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                            <a href="#" class="btn btn-outline-success" style="flex: 1; min-width: 200px; text-align: center;">山西女性创业扶持政策</a>
+                            <a href="#" class="btn btn-outline-success" style="flex: 1; min-width: 200px; text-align: center;">非遗传承培训报名</a>
+                            <a href="#" class="btn btn-outline-success" style="flex: 1; min-width: 200px; text-align: center;">乡村振兴项目申请</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部导航 -->
+            <div class="page-footer">
+                <div class="footer-nav">
+                    <button class="btn btn-danger" onclick="switchPage('exhibition2')">返回第二展厅</button>
+                    <button class="btn btn-primary" onclick="switchPage('interaction')">进入互动专区</button>
+                </div>
+                <p class="copyright">本展厅内容源自《毛中特实践作业2》"三晋创新巾帼志（1978年至今）"板块 | 版权归实践作业团队所有</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 互动专区 -->
+    <div id="interaction" class="page-content" style="display: none;">
+        <div class="container">
+            <!-- 标题区 -->
+            <div class="page-header header-inter">
+                <div id="ai-character-button" style="position: absolute; top: 1rem; left: 1rem; width: 60px; height: 80px; cursor: pointer; z-index: 2; transform-origin: center bottom; transition: all 0.3s ease; animation: float 3s ease-in-out infinite;" onclick="this.style.transform = 'scale(0.95) translateY(5px)'; setTimeout(() => { this.style.transform = 'scale(1) translateY(0)'; openAIQAPage(); }, 150);">
+  <!-- 小人头部 -->
+  <div style="position: relative; width: 44px; height: 44px; background-color: #f5d0a9; border-radius: 50%; margin: 0 auto; box-shadow: inset -2px -2px 3px rgba(0,0,0,0.1); animation: breath 3s ease-in-out infinite; cursor: pointer;" onclick="event.stopPropagation(); document.getElementById('ai-character-button').click();">
+    <!-- 眼睛 - 更生动的设计 -->
+    <div style="position: absolute; top: 12px; left: 8px; width: 8px; height: 8px; background-color: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+      <div style="width: 3px; height: 3px; background-color: white; border-radius: 50%; transform: translate(1px, -1px);"></div>
+    </div>
+    <div style="position: absolute; top: 12px; right: 8px; width: 8px; height: 8px; background-color: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+      <div style="width: 3px; height: 3px; background-color: white; border-radius: 50%; transform: translate(1px, -1px);"></div>
+    </div>
+    <!-- 眉毛 -->
+    <div style="position: absolute; top: 6px; left: 6px; width: 10px; height: 2px; background-color: #333; border-radius: 1px; transform: rotate(-5deg);"></div>
+    <div style="position: absolute; top: 6px; right: 6px; width: 10px; height: 2px; background-color: #333; border-radius: 1px; transform: rotate(5deg);"></div>
+    <!-- 嘴巴 - 微笑表情 -->
+    <div style="position: absolute; bottom: 8px; left: 12px; width: 20px; height: 10px; border: 2px solid #333; border-top: none; border-radius: 0 0 12px 12px;"></div>
+    <!-- 腮红 -->
+    <div style="position: absolute; top: 20px; left: 2px; width: 6px; height: 3px; background-color: rgba(255, 105, 180, 0.4); border-radius: 3px;"></div>
+    <div style="position: absolute; top: 20px; right: 2px; width: 6px; height: 3px; background-color: rgba(255, 105, 180, 0.4); border-radius: 3px;"></div>
+    <!-- AI标志 - 更炫的效果 -->
+    <div style="position: absolute; top: -8px; right: -8px; width: 22px; height: 22px; background: linear-gradient(135deg, #4CAF50, #8BC34A); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); animation: pulse 2s ease-in-out infinite;">AI</div>
+  </div>
+  <!-- 小人身体 -->
+  <div style="position: relative; width: 40px; height: 40px; margin: 0 auto; cursor: pointer;" onclick="event.stopPropagation(); document.getElementById('ai-character-button').click();">
+    <!-- 身体 - 添加衣服细节 -->
+    <div style="position: absolute; top: 0; left: 10px; width: 20px; height: 28px; background: linear-gradient(180deg, #2196F3, #1976D2); border-radius: 10px 10px 0 0; box-shadow: inset 0 -2px 3px rgba(0,0,0,0.1); cursor: pointer;" onclick="event.stopPropagation(); document.getElementById('ai-character-button').click();">
+      <!-- 衣服领口 -->
+      <div style="position: absolute; top: -5px; left: 5px; width: 10px; height: 5px; background-color: #FFC107; border-radius: 5px 5px 0 0;"></div>
+    </div>
+    <!-- 手臂 - 添加动态效果 -->
+    <div style="position: absolute; top: 5px; left: 0; width: 10px; height: 15px; background: linear-gradient(180deg, #2196F3, #1976D2); border-radius: 5px; transform: rotate(-20deg); animation: wave-left 2s ease-in-out infinite alternate; cursor: pointer;" onclick="event.stopPropagation(); document.getElementById('ai-character-button').click();"></div>
+    <div style="position: absolute; top: 5px; right: 0; width: 10px; height: 15px; background: linear-gradient(180deg, #2196F3, #1976D2); border-radius: 5px; transform: rotate(15deg); cursor: pointer;" onclick="event.stopPropagation(); document.getElementById('ai-character-button').click();"></div>
+    <!-- 腿部 -->
+    <div style="position: absolute; bottom: 0; left: 12px; width: 8px; height: 15px; background: linear-gradient(180deg, #FFC107, #FFA000); border-radius: 0 0 4px 4px; cursor: pointer;" onclick="event.stopPropagation(); document.getElementById('ai-character-button').click();"></div>
+    <div style="position: absolute; bottom: 0; right: 12px; width: 8px; height: 15px; background: linear-gradient(180deg, #FFC107, #FFA000); border-radius: 0 0 4px 4px; cursor: pointer;" onclick="event.stopPropagation(); document.getElementById('ai-character-button').click();"></div>
+  </div>
+  
+  <style>
+  /* 动画效果 */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  @keyframes breath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 2px 5px rgba(0,0,0,0.2); transform: scale(1); }
+    50% { box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); transform: scale(1.05); }
+  }
+  
+  @keyframes wave-left {
+    0% { transform: rotate(-20deg); }
+    100% { transform: rotate(-50deg); }
+  }
+  
+  /* 悬停效果 */
+  #ai-character-button:hover {
+    animation-play-state: paused;
+  }
+  
+  #ai-character-button:hover .eye {
+    animation: blink 2s ease-in-out infinite;
+  }
+  </style>
+</div>
+
+<script>
+function openAIQAPage() {
+  // 直接跳转到豆包官网页面
+  window.open('https://www.doubao.com/', '_blank');
+}
+</script>
+                <h1>互动专区：分享你的"巾帼记忆"</h1>
+                <p>从旁观者到参与者，共话三晋巾帼风采</p>
+            </div>
+
+            <!-- 模块1：我的巾帼记忆留言墙 -->
+            <div class="inter-module">
+                <h3>1. "我的巾帼记忆"留言墙</h3>
+                <p>分享你身边女性长辈的故事，如奶奶的支前经历、妈妈的创业故事：</p>
+                <div class="form-group">
+                    <label for="memoryText">你的故事（限500字）：</label>
+                    <textarea class="form-control" id="memoryText" placeholder="请写下你身边女性长辈的故事..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="memoryImg">上传老照片（可选）：</label>
+                    <input type="file" class="form-control" id="memoryImg" accept="image/jpg,image/png">
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">请标注照片拍摄时间与人物，如"1980年，我的母亲在太钢工作"</p>
+                </div>
+                <button class="btn btn-primary" onclick="submitMemory()">提交故事</button>
+                <div id="memoryTip" style="margin-top: 1rem; color: #3c763d; display: none;">
+                    感谢分享！你的内容将在审核后展示（1-2个工作日）
+                </div>
+                <!-- 已展示留言（示例） -->
+                <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <h4>已审核通过的故事（示例）：</h4>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <div class="card-content">
+                            <p><strong>分享人：匿名</strong> | 2024年5月</p>
+                            <p>我的奶奶是太行根据地的妇女救国会成员，1943年她18岁，和其他妇女一起做军鞋，白天种地，晚上在煤油灯下纳鞋底，手指经常被针扎破。她说："能为八路军做事，再苦也值！"</p>
+                            <img src="./example-memory.jpg" alt="1943年妇女救国会做军鞋场景"
+                                style="width: 100%; max-width: 400px; border-radius: 4px; margin-top: 1rem;">
+                            <p class="img-source">照片说明：1943年，我的奶奶（左三）在太行根据地做军鞋（源自用户分享）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模块2：知识问答闯关 -->
+            <div class="inter-module">
+                <h3>2. 知识问答闯关</h3>
+                <p>检验你对山西巾帼故事的了解程度，答对8题可获"三晋巾帼守护者"电子证书：</p>
+                <!-- 题目1 -->
+                <div class="qna-item">
+                    <div class="qna-question">1. 申纪兰推动的哪项制度写入1954年宪法？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(1, this, 'A')">A. 男女同工同酬</div>
+                        <div class="option" onclick="checkAnswer(1, this, 'B')">B. 妇女选举权</div>
+                        <div class="option" onclick="checkAnswer(1, this, 'C')">C. 义务教育</div>
+                    </div>
+                    <div class="qna-explain" id="explain1" style="display: none;">
+                        解析：申纪兰带领西沟妇女争取"男女同工同酬"，并推动这一制度写入1954年宪法，成为中国妇女解放史上的里程碑。
+                    </div>
+                </div>
+                <!-- 题目2 -->
+                <div class="qna-item">
+                    <div class="qna-question">2. 太行奶娘主要活跃在哪个历史时期？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(2, this, 'A')">A. 抗日战争</div>
+                        <div class="option" onclick="checkAnswer(2, this, 'B')">B. 解放战争</div>
+                        <div class="option" onclick="checkAnswer(2, this, 'C')">C. 社会主义建设</div>
+                    </div>
+                    <div class="qna-explain" id="explain2" style="display: none;">
+                        解析：1937-1945年抗日战争期间，太行、太岳根据地的"太行奶娘"冒着生命危险哺育八路军后代。
+                    </div>
+                </div>
+                <!-- 题目3 -->
+                <div class="qna-item">
+                    <div class="qna-question">3. 刘胡兰牺牲时的年龄是？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(3, this, 'A')">A. 15岁</div>
+                        <div class="option" onclick="checkAnswer(3, this, 'B')">B. 18岁</div>
+                        <div class="option" onclick="checkAnswer(3, this, 'C')">C. 20岁</div>
+                    </div>
+                    <div class="qna-explain" id="explain3" style="display: none;">
+                        解析：1947年1月12日，15岁的刘胡兰面对敌人铡刀毫不畏惧，为革命牺牲，是中国共产党历史上年龄最小的烈士之一。
+                    </div>
+                </div>
+                <!-- 题目4 -->
+                <div class="qna-item">
+                    <div class="qna-question">4. 郭凤莲带领的"铁姑娘队"主要参与什么建设？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(4, this, 'A')">A. 农业生产</div>
+                        <div class="option" onclick="checkAnswer(4, this, 'B')">B. 铁路建设</div>
+                        <div class="option" onclick="checkAnswer(4, this, 'C')">C. 工业制造</div>
+                    </div>
+                    <div class="qna-explain" id="explain4" style="display: none;">
+                        解析：郭凤莲带领的"铁姑娘队"是"农业学大寨"运动的典型代表，主要参与梯田抢修、粮食生产等农业建设。
+                    </div>
+                </div>
+                <!-- 题目5 -->
+                <div class="qna-item">
+                    <div class="qna-question">5. 山西女性非遗传承人主要传承的技艺不包括？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(5, this, 'A')">A. 剪纸</div>
+                        <div class="option" onclick="checkAnswer(5, this, 'B')">B. 面塑</div>
+                        <div class="option" onclick="checkAnswer(5, this, 'C')">C. 皮影戏</div>
+                    </div>
+                    <div class="qna-explain" id="explain5" style="display: none;">
+                        解析：山西女性非遗传承人主要活跃在剪纸、刺绣、面塑等领域，皮影戏并非山西女性非遗传承的主要项目。
+                    </div>
+                </div>
+                <!-- 题目6 -->
+                <div class="qna-item">
+                    <div class="qna-question">6. 妇女救国会的主要工作不包括？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(6, this, 'A')">A. 组织妇女参军打仗</div>
+                        <div class="option" onclick="checkAnswer(6, this, 'B')">B. 制作军鞋支援前线</div>
+                        <div class="option" onclick="checkAnswer(6, this, 'C')">C. 筹集军粮保障供给</div>
+                    </div>
+                    <div class="qna-explain" id="explain6" style="display: none;">
+                        解析：妇女救国会主要负责后方支援工作，如制作军鞋、筹集军粮等，不直接组织妇女参军打仗。
+                    </div>
+                </div>
+                <!-- 题目7 -->
+                <div class="qna-item">
+                    <div class="qna-question">7. 脱贫攻坚期间，山西女性驻村干部带动多少个贫困村脱贫摘帽？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(7, this, 'A')">A. 832个</div>
+                        <div class="option" onclick="checkAnswer(7, this, 'B')">B. 500个</div>
+                        <div class="option" onclick="checkAnswer(7, this, 'C')">C. 1000个</div>
+                    </div>
+                    <div class="qna-explain" id="explain7" style="display: none;">
+                        解析：2015-2020年脱贫攻坚期间，山西女性驻村干部推动832个贫困村脱贫摘帽。
+                    </div>
+                </div>
+                <!-- 题目8 -->
+                <div class="qna-item">
+                    <div class="qna-question">8. 太钢"工业娘子军"在哪个领域获得技术创新奖？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(8, this, 'A')">A. 特种钢轧制</div>
+                        <div class="option" onclick="checkAnswer(8, this, 'B')">B. 煤炭开采</div>
+                        <div class="option" onclick="checkAnswer(8, this, 'C')">C. 机械制造</div>
+                    </div>
+                    <div class="qna-explain" id="explain8" style="display: none;">
+                        解析：太钢女技术员王某研发的"特种钢轧制技术"获得1968年"全国工业技术创新奖"。
+                    </div>
+                </div>
+                <!-- 题目9 -->
+                <div class="qna-item">
+                    <div class="qna-question">9. 山西女企业家在哪个领域实现了煤基新材料创新？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(9, this, 'A')">A. 可降解塑料</div>
+                        <div class="option" onclick="checkAnswer(9, this, 'B')">B. 智能手机芯片</div>
+                        <div class="option" onclick="checkAnswer(9, this, 'C')">C. 新能源汽车</div>
+                    </div>
+                    <div class="qna-explain" id="explain9" style="display: none;">
+                        解析：山西女企业家研发煤基新材料，将煤炭转化为"可降解塑料原料"，打破国外技术垄断。
+                    </div>
+                </div>
+                <!-- 题目10 -->
+                <div class="qna-item">
+                    <div class="qna-question">10. "男女同工同酬"写入宪法的年份是？（ ）</div>
+                    <div class="qna-options">
+                        <div class="option" onclick="checkAnswer(10, this, 'A')">A. 1954年</div>
+                        <div class="option" onclick="checkAnswer(10, this, 'B')">B. 1978年</div>
+                        <div class="option" onclick="checkAnswer(10, this, 'C')">C. 1982年</div>
+                    </div>
+                    <div class="qna-explain" id="explain10" style="display: none;">
+                        解析：在申纪兰的推动下，"男女同工同酬"于1954年被写入宪法，成为中国妇女解放史上的重要里程碑。
+                    </div>
+                </div>
+                <button class="btn btn-warning" style="margin-top: 1rem;" onclick="calculateScore()">提交答案，查看得分</button>
+                <div id="scoreResult" style="margin-top: 1rem; font-size: 1.1rem; display: none;">
+                    你的得分：<span id="score">0</span>/10（答对8题及以上可获电子证书）
+                </div>
+                <button class="btn btn-primary" id="certBtn" style="margin-top: 1rem; display: none;"
+                    onclick="openCert()">生成电子证书</button>
+            </div>
+
+            <!-- 模块3：虚拟献花 -->
+            <div class="inter-module">
+                <h3>3. 虚拟献花：致敬巾帼英雄</h3>
+                <p>为刘胡兰、申纪兰等山西巾帼英雄献花，表达敬意：</p>
+                <div class="flower-container">
+                    <div class="flower-item">
+                        <div class="flower-img">
+                            <img src="./liuhulan-portrait.jpg" alt="刘胡兰">
+                        </div>
+                        <h4>刘胡兰</h4>
+                        <p class="flower-count">献花数：<span id="flower1">0</span></p>
+                        <button class="btn btn-danger" onclick="addFlower(1)">献花</button>
+                    </div>
+                    <div class="flower-item">
+                        <div class="flower-img">
+                            <img src="./shenjilan-portrait.jpg" alt="申纪兰">
+                        </div>
+                        <h4>申纪兰</h4>
+                        <p class="flower-count">献花数：<span id="flower2">0</span></p>
+                        <button class="btn btn-danger" onclick="addFlower(2)">献花</button>
+                    </div>
+                    <div class="flower-item">
+                        <div class="flower-img">
+                            <img src="./guofenglian-portrait.jpg" alt="郭凤莲">
+                        </div>
+                        <h4>郭凤莲</h4>
+                        <p class="flower-count">献花数：<span id="flower3">0</span></p>
+                        <button class="btn btn-danger" onclick="addFlower(3)">献花</button>
+                    </div>
+                    <div class="flower-item">
+                        <div class="flower-img">
+                            <img src="./taihang-nainiang-portrait.jpg" alt="太行奶娘群体">
+                        </div>
+                        <h4>太行奶娘群体</h4>
+                        <p class="flower-count">献花数：<span id="flower4">0</span></p>
+                        <button class="btn btn-danger" onclick="addFlower(4)">献花</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模块4：线上问卷 -->
+            <div class="inter-module">
+                <h3>4. 线上问卷：你的"巾帼观"</h3>
+                <p>参与问卷，帮助我们了解当代人对山西巾帼故事的认知：</p>
+                <!-- 问卷1 -->
+                <div class="form-group">
+                    <label>1. 你通过什么渠道了解山西巾帼英雄的故事？（单选）</label>
+                    <div>
+                        <input type="radio" name="q1" id="q1a" value="A"> <label for="q1a">A. 学校教育</label><br>
+                        <input type="radio" name="q1" id="q1b" value="B"> <label for="q1b">B. 家庭讲述</label><br>
+                        <input type="radio" name="q1" id="q1c" value="C"> <label for="q1c">C. 网络媒体</label><br>
+                        <input type="radio" name="q1" id="q1d" value="D"> <label for="q1d">D. 博物馆/纪念馆</label>
+                    </div>
+                </div>
+                <!-- 问卷2 -->
+                <div class="form-group">
+                    <label>2. 你认为山西女性的哪些品质最值得传承？（可多选）</label>
+                    <div>
+                        <input type="checkbox" name="q2" id="q2a" value="A"> <label for="q2a">A. 坚韧不拔</label><br>
+                        <input type="checkbox" name="q2" id="q2b" value="B"> <label for="q2b">B. 创新进取</label><br>
+                        <input type="checkbox" name="q2" id="q2c" value="C"> <label for="q2c">C. 无私奉献</label><br>
+                        <input type="checkbox" name="q2" id="q2d" value="D"> <label for="q2d">D. 家国情怀</label>
+                    </div>
+                </div>
+                <!-- 问卷3 -->
+                <div class="form-group">
+                    <label>3. 你希望通过哪些形式了解更多山西女性历史？（可多选）</label>
+                    <div>
+                        <input type="checkbox" name="q3" id="q3a" value="A"> <label for="q3a">A. 纪录片</label><br>
+                        <input type="checkbox" name="q3" id="q3b" value="B"> <label for="q3b">B. 线下展览</label><br>
+                        <input type="checkbox" name="q3" id="q3c" value="C"> <label for="q3c">C. 主题讲座</label><br>
+                        <input type="checkbox" name="q3" id="q3d" value="D"> <label for="q3d">D. 互动游戏</label>
+                    </div>
+                </div>
+                <!-- 问卷4 -->
+                <div class="form-group">
+                    <label>4. 你认为当代女性在哪些领域最能体现"巾帼力量"？（简答）</label>
+                    <textarea class="form-control" placeholder="请输入你的看法..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="submitQuestionnaire()">提交问卷</button>
+                <div id="questionnaireTip" style="margin-top: 1rem; color: #3c763d; display: none;">
+                    感谢参与问卷调查！您的反馈将帮助我们更好地传播山西巾帼故事
+                </div>
+            </div>
+
+            <!-- 底部导航 -->
+            <div class="page-footer">
+                <div class="footer-nav">
+                    <button class="btn btn-danger" onclick="switchPage('exhibition3')">返回第三展厅</button>
+                    <button class="btn btn-primary" onclick="switchPage('resources')">查看资源与版权</button>
+                </div>
+                <p class="copyright">本互动专区内容版权归第五组所有 | 2025年10月制作</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 资源与版权页 -->
+    <div id="resources" class="page-content" style="display: none;">
+        <div class="container">
+            <!-- 标题区 -->
+            <div class="page-header header-res">
+                <h1>资源与版权信息</h1>
+                <p>史料来源与使用说明</p>
+            </div>
+
+            <!-- 资源分类展示 -->
+            <div class="resource-category">
+                <h3>一、史料文献资源</h3>
+                <ul class="resource-list">
+                    <li>
+                        <a href="http://www.sxsdaj.gov.cn/" class="resource-link" target="_blank">山西省档案馆官网</a>
+                        <p>提供革命时期妇女运动档案、建设时期劳模事迹等原始文献</p>
+                    </li>
+                    <li>
+                        <a href="http://www.hongsesx.com/index.php?m=home&c=View&a=index&aid=226" class="resource-link" target="_blank">文水县刘胡兰纪念馆官网</a>
+                        <p>包含刘胡兰生平事迹、相关历史照片及研究文献</p>
+                    </li>
+                    <li>
+                        <a href="http://www.balujun.cn/" class="resource-link" target="_blank">武乡八路军太行纪念馆官网</a>
+                        <p>收录太行奶娘、妇女救国会等相关历史资料</p>
+                    </li>
+                    <li>
+                        <p>《山西妇女运动史》（XX出版社，2010年版）</p>
+                        <p>系统梳理山西女性在不同历史时期的贡献</p>
+                    </li>
+                    <li>
+                        <p>《申纪兰传》（XX出版社，2020年版）</p>
+                        <p>详细记录申纪兰推动"男女同工同酬"的历史过程</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>二、影音图像资源</h3>
+                <ul class="resource-list">
+                    <li>
+                        <a href="http://sx.wenming.cn/ptlm_jjsj/202311/t20231107_6694747.shtml" class="resource-link" target="_blank">山西省文旅厅官网"非遗传承人"专栏</a>
+                        <p>提供非遗传承人采访视频、技艺展示影像</p>
+                    </li>
+                    <li>
+                        <a href="http://www.sxrb.com/" class="resource-link" target="_blank">山西日报电子版档案库</a>
+                        <p>包含1949年至今关于山西女性的新闻报道与图片</p>
+                    </li>
+                    <li>
+                        <p>太钢集团厂史馆藏影像资料（1950-1970年）</p>
+                        <p>记录工业建设时期女性职工工作场景</p>
+                    </li>
+                    <li>
+                        <p>山西省妇联"山西巾帼英烈"专栏插画集（2020年）</p>
+                        <p>包含革命时期女性英雄事迹的艺术再现</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>三、实践调研资源</h3>
+                <ul class="resource-list">
+                    <li>
+                        <p>山西省乡村振兴局《2022年脱贫攻坚总结报告》</p>
+                        <p>包含女性驻村干部工作成效的统计数据</p>
+                    </li>
+                    <li>
+                        <a href="https://www.banbiantian.org.cn/fulianjianjie/2018120815520300116.html" class="resource-link" target="_blank">山西省妇联官网</a>
+                        <p>提供当代山西女性发展现状、典型案例等资料</p>
+                    </li>
+                    <li>
+                        <a href="https://wenku.baidu.com/view/0dde26141711cc7930b71630?_wkts_=1761641475724" class="resource-link" target="_blank">晋商家庭中的女性角色</a>
+                        <p>收录山西商妇在家庭中的地位，角色</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>四、版权声明</h3>
+                <ul class="resource-list">
+                    <li>
+                        <p>本线上展览内容基于《毛概实践作业》要求制作，仅供学习交流使用</p>
+                    </li>
+                    <li>
+                        <p>所使用的史料文献、影音图像等资源均标注来源，版权归原作者或机构所有</p>
+                    </li>
+                    <li>
+                        <p>未经授权，不得将本展览内容用于商业用途</p>
+                    </li>
+                    <li>
+                        <p>如涉及版权问题，请联系：xxx@example.com</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>五、实践拓展建议</h3>
+                <ul class="resource-list">
+                    <li>
+                        <p>实地调研：推荐前往刘胡兰纪念馆、西沟村史馆、大寨纪念馆进行现场学习</p>
+                    </li>
+                    <li>
+                        <p>访谈对象：可联系当地妇联、社区居委会协助寻找女性历史见证者</p>
+                    </li>
+                    <li>
+                        <p>研究方向：建议从"性别平等""女性领导力""非遗传承创新"等角度深入研究</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 底部导航 -->
+            <div class="page-footer">
+                <div class="footer-nav">
+                    <button class="btn btn-danger" onclick="switchPage('interaction')">返回互动专区</button>
+                    <button class="btn btn-primary" onclick="switchPage('index')">返回首页</button>
+                </div>
+                <p class="copyright">本资源页内容版权归第五组所有 | 2025年10月制作</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面切换功能
+        function switchPage(pageId) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+            // 显示目标页面
+            document.getElementById(pageId).style.display = 'block';
+            // 更新导航激活状态
+            document.querySelectorAll('.nav-list li a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.nav-list li a[href="#${pageId}"]`).classList.add('active');
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+
+        // 图片放大功能
+        function openMask(src) {
+            const mask = document.querySelector('.mask');
+            const maskImg = document.querySelector('.mask-img');
+            maskImg.src = src;
+            mask.style.display = 'flex';
+        }
+
+        function closeMask() {
+            document.querySelector('.mask').style.display = 'none';
+        }
+
+        // 轮播图功能
+        let currentSlide = 0;
+        function switchCarousel(index) {
+            const slides = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.dot');
+
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+
+            currentSlide = index;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        // 自动轮播
+        setInterval(() => {
+            const slides = document.querySelectorAll('.carousel-item');
+            let nextSlide = (currentSlide + 1) % slides.length;
+            switchCarousel(nextSlide);
+        }, 5000);
+
+        // 音频播放控制
+        function playAudio(audioId) {
+            const audio = document.getElementById(audioId);
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // 非遗体验教程显示/隐藏
+        function showIntangibleTip() {
+            const tip = document.getElementById('intangibleTip');
+            tip.style.display = tip.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 家庭故事表单显示/隐藏
+        function showMyStory() {
+            const form = document.getElementById('myStoryForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 提交家庭故事
+        function submitMyStory() {
+            const story = document.getElementById('myStory').value;
+            if (story.trim() === '') {
+                alert('请输入你的家庭女性故事');
+                return;
+            }
+            alert('感谢分享你的故事！你的故事将成为展览的一部分');
+            document.getElementById('myStory').value = '';
+            document.getElementById('myStoryForm').style.display = 'none';
+        }
+
+        // 知识问答功能
+        const correctAnswers = { 1: 'A', 2: 'A', 3: 'A', 4: 'A', 5: 'C', 6: 'A', 7: 'A', 8: 'A', 9: 'A', 10: 'A' };
+        const userAnswers = {};
+
+        function checkAnswer(questionId, element, selectedAnswer) {
+            // 记录用户答案
+            userAnswers[questionId] = selectedAnswer;
+
+            // 重置该题所有选项样式
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+
+            // 显示正确/错误样式
+            if (selectedAnswer === correctAnswers[questionId]) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+                // 显示正确答案
+                options.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes(`'${correctAnswers[questionId]}'`)) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            // 显示解析
+            document.getElementById(`explain${questionId}`).style.display = 'block';
+        }
+
+        // 计算得分
+        function calculateScore() {
+            let score = 0;
+            for (let i = 1; i <= 10; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    score++;
+                }
+            }
+            document.getElementById('score').textContent = score;
+            document.getElementById('scoreResult').style.display = 'block';
+
+            // 显示证书按钮（答对8题及以上）
+            document.getElementById('certBtn').style.display = score >= 8 ? 'block' : 'none';
+        }
+
+        // 证书弹窗控制
+        function openCert() {
+            document.getElementById('certModal').style.display = 'flex';
+        }
+
+        function closeCert() {
+            document.getElementById('certModal').style.display = 'none';
+        }
+
+        function saveCert() {
+            alert('证书已保存到本地（模拟功能）');
+        }
+
+        // 虚拟献花功能
+        function addFlower(id) {
+            const flowerCount = document.getElementById(`flower${id}`);
+            let count = parseInt(flowerCount.textContent);
+            flowerCount.textContent = count + 1;
+        }
+
+        // 提交记忆故事
+        function submitMemory() {
+            const text = document.getElementById('memoryText').value;
+            if (text.trim() === '') {
+                alert('请输入你的故事内容');
+                return;
+            }
+            document.getElementById('memoryTip').style.display = 'block';
+            document.getElementById('memoryText').value = '';
+            document.getElementById('memoryImg').value = '';
+        }
+
+        // 提交问卷
+        function submitQuestionnaire() {
+            // 简单验证至少选择一个选项
+            const q1Selected = document.querySelector('input[name="q1"]:checked');
+            if (!q1Selected) {
+                alert('请完成第一题问卷');
+                return;
+            }
+            document.getElementById('questionnaireTip').style.display = 'block';
+        }
+
+        // 分享功能（模拟）
+        function shareWechat() {
+            alert('已复制链接到微信剪贴板（模拟功能）');
+        }
+
+        function shareWeibo() {
+            alert('已跳转到微博分享页面（模拟功能）');
+        }
+    </script>
+</body>
+
+
+</html>
